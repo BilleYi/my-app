@@ -1,8 +1,23 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import { Layout } from 'antd';
+import AppHeader from './components/Header';
+
+const { Header, Footer, Content } = Layout;
+
+function App() {
+    return (
+      <Layout style={{minWidth:'1000px'}}>
+        <Header className="header">
+          <AppHeader />
+        </Header>
+        <Content className="content">Content</Content>
+        <Footer className="footer">Footer</Footer>
+      </Layout>
+    )
+}
+
 
 ReactDOM.render(
   <React.StrictMode>
@@ -10,8 +25,3 @@ ReactDOM.render(
   </React.StrictMode>,
   document.getElementById('root')
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
