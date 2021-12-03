@@ -1,34 +1,74 @@
 /**
  * 头部组件
  */
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import logo from "./logo.png";
 import './style.css';
 import { Menu } from 'antd';
+import axios from "axios";
 import { MailOutlined,TwitterOutlined,WechatOutlined,BookOutlined } from '@ant-design/icons';
 
 //HOOK使用
 function AppHeader(){
-    const [list, setList] = useState([
-        {id: 1, icon: <MailOutlined />, title: '邮件'},
-        {id: 2, icon: <TwitterOutlined />, title: '推特'},
-        {id: 3, icon: <WechatOutlined />, title: '微信'},
-        {id: 4, icon: <BookOutlined />, title: '图书'},
-    ]);
+    // const [list, setList] = useState([//假数据模拟
+    //     // {id: 1, icon: <MailOutlined />, title: '邮件'},
+    //     // {id: 2, icon: <TwitterOutlined />, title: '推特'},
+    //     // {id: 3, icon: <WechatOutlined />, title: '微信'},
+    //     // {id: 4, icon: <BookOutlined />, title: '图书'},
+    //     {id: 1, icon: 'MailOutlined', title: '邮件'},
+    //     {id: 2, icon: 'TwitterOutlined', title: '推特'},
+    //     {id: 3, icon: 'WechatOutlined', title: '微信'},
+    //     {id: 4, icon: 'BookOutlined', title: '图书'},
+    // ]);
+   
+    //使用HOOKS
+    const [list, setList] = useState([]);
 
+    useEffect(() => {
+        //从后端获取JSON数据
+        axios.get('http://localhost:8000/json')
+        .then(async res => {
+            await setList(res.data.data);
+        })
+        .catch(err => console.error(err))
+    },[])
+
+    //通过循环遍历返回需要渲染的组件
     function getMenuItems() {
         return list.map(item => {
+            //从后台获取JSON数据，通过icon值匹配对应的icon组件并返回 
+            let icon;   
+            switch (item.icon){
+                case 'BookOutlined':
+                    icon = <BookOutlined />
+                    break;
+                case 'MailOutlined':
+                    icon = <MailOutlined />
+                    break;
+                case 'TwitterOutlined':
+                    icon = <TwitterOutlined />
+                    break;
+                case 'WechatOutlined':
+                    icon = <WechatOutlined />
+                    break;
+                default:
+                    console.log('没有匹配相应的ICON');
+                    icon = null
+            }
+                
             return (
                 <Menu.Item 
                 key={item.id} 
-                icon={item.icon}
+                icon={icon}
                 >
                 {item.title}
                 </Menu.Item>
             )
         });
     };
-
+    // console.log(Array.isArray(getMenuItems()))//true
+    // console.log(...getMenuItems());
+    // console.log(...list);
     return(
         <Fragment>
              <img className="app-header-logo" alt="logo" src= {logo}/>
