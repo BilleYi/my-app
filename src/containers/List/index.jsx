@@ -27,12 +27,12 @@ class PageList extends Component {
                     onChange: page => {
                         console.log(page);
                     },
-                    pageSize: 3,
+                    pageSize: 5,
                 }}
                 dataSource={this.state.listData}
                 footer={
                     <div>
-                        <b>新闻网</b>
+                        <b>欢迎光临小云村</b>
                     </div>
                 }
                 renderItem={item => (
@@ -40,14 +40,14 @@ class PageList extends Component {
                         key={item.title}
                         actions={[
                             <IconText icon={StarOutlined} text="666" key="list-vertical-star-o" />,
-                            <IconText icon={LikeOutlined} text="666" key="list-vertical-like-o" />,
+                            <IconText icon={LikeOutlined} text={item.liked} key="list-vertical-like-o" />,
                             <IconText icon={MessageOutlined} text="6" key="list-vertical-message" />,
                         ]}
                         extra={
                             <img
-                                width={300}
+                                width={100}
                                 alt="logo"
-                                src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png"
+                                src={item.pic}
                             />
                         }
                     >
@@ -71,10 +71,12 @@ class PageList extends Component {
                 .then(res => {
                     newData.push({
                         href: '#',
-                        title: `新闻 ${res.data.data.songId}`,
-                        avatar: 'https://joeschmoe.io/api/v1/random',
-                        description: 'hello',
+                        title: res.data.data.nickname,
+                        avatar: res.data.data.avatar,
+                        description: res.data.data.songName,
                         content: res.data.data.content,
+                        pic: res.data.data.songPic,
+                        liked: res.data.data.likedCount,
                     });
                 })
                 .catch(error => console.log(error));
