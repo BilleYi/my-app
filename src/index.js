@@ -1,11 +1,11 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter, Route } from 'react-router-dom';
 import './index.css';
 import { Layout } from 'antd';
+import Router from './router';
+import { BrowserRouter } from 'react-router-dom';
 import AppHeader from './components/Header';
-import List from './containers/List';
-import Detail from './containers/Detail';
+import AppFooter from './components/Footer';
 
 const { Header, Footer, Content } = Layout;
 
@@ -17,14 +17,13 @@ function App() {
             <AppHeader />
           </Header>
           <Content className="content">
-              <Fragment>
-                <Route path="/:id?" component={List} exact />
-                <Route path="/detail" component={Detail}/>
-              </Fragment>
+            <Router />
           </Content>
-          <Footer className="footer">Footer</Footer>
+          <Footer className="footer">
+            <AppFooter />
+          </Footer>
         </Layout>
-      </BrowserRouter>
+    </BrowserRouter>
     )
 }
 

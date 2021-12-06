@@ -11,7 +11,7 @@ const IconText = ({ icon, text }) => (
     </Space>
 );
 
-class PageList extends Component {
+class MusicReview extends Component {
     constructor(props) {
         super(props);
         this.state = {listData: []}
@@ -37,7 +37,7 @@ class PageList extends Component {
                 }
                 renderItem={item => (
                     <List.Item
-                        key={item.title}
+                        key={item.id}
                         actions={[
                             <IconText icon={StarOutlined} text="666" key="list-vertical-star-o" />,
                             <IconText icon={LikeOutlined} text={item.liked} key="list-vertical-like-o" />,
@@ -66,11 +66,12 @@ class PageList extends Component {
     //异步请求API获取数据
     async getInfo() {
         let newData = [];
-        for (let i = 0; i < 9; i++) {
-           await axios.get('https://api.muxiaoguo.cn/api/163reping')
+        for (let i = 0; i < 3; i++) {
+            await axios.get('https://rap2.mez100.com/rapserver/app/mock/56/pages/1')//https://api.muxiaoguo.cn/api/163reping
                 .then(res => {
                     newData.push({
                         href: '#',
+                        id: res.data.data.songId,
                         title: res.data.data.nickname,
                         avatar: res.data.data.avatar,
                         description: res.data.data.songName,
@@ -85,11 +86,11 @@ class PageList extends Component {
     }
 
     componentDidMount = () => {
-        console.log('前',this.state.listData)
+        // console.log('前',this.state.listData)
         this.getInfo()
-        console.log('后',this.state.listData)
+        // console.log('后',this.state.listData)
     }
 
 }
 
-export default PageList;
+export default MusicReview;

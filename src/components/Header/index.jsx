@@ -6,7 +6,8 @@ import logo from "./logo.png";
 import './style.css';
 import { Menu } from 'antd';
 import axios from "axios";
-import { MailOutlined,TwitterOutlined,WechatOutlined,BookOutlined } from '@ant-design/icons';
+import { MailOutlined,TwitterOutlined,WechatOutlined } from '@ant-design/icons';
+import { Link } from 'react-router-dom';
 
 //HOOK使用
 function AppHeader(){
@@ -26,7 +27,7 @@ function AppHeader(){
 
     useEffect(() => {
         //从后端获取JSON数据
-        axios.get('http://localhost:8000/json')
+        axios.get('https://rap2.mez100.com/rapserver/app/mock/56/headermenus')
         .then(async res => {
             await setList(res.data.data);
         })
@@ -39,9 +40,6 @@ function AppHeader(){
             //从后台获取JSON数据，通过icon值匹配对应的icon组件并返回 
             let icon;   
             switch (item.icon){
-                case 'BookOutlined':
-                    icon = <BookOutlined />
-                    break;
                 case 'MailOutlined':
                     icon = <MailOutlined />
                     break;
@@ -57,12 +55,17 @@ function AppHeader(){
             }
                 
             return (
-                <Menu.Item 
-                key={item.id} 
-                icon={icon}
-                >
-                {item.title}
-                </Menu.Item>
+                
+                    <Menu.Item 
+                    key={item.id} 
+                    icon={icon}
+                    >
+                    <Link to={`/pages/${item.id}`}>
+                    {item.title}
+                    </Link>
+                    </Menu.Item>
+                
+               
             )
         });
     };
@@ -71,9 +74,11 @@ function AppHeader(){
     // console.log(...list);
     return(
         <Fragment>
-             <img className="app-header-logo" alt="logo" src= {logo}/>
+            <Link to="/">
+                <img className="app-header-logo" alt="logo" src= {logo}/>
+            </Link>
             <Menu className="app-header-menu" mode="horizontal">
-               {getMenuItems()}
+                {getMenuItems()}  
             </Menu>
         </Fragment>
        
