@@ -4,9 +4,9 @@
 import React, { Fragment, useEffect, useState } from "react";
 import logo from "./logo.png";
 import './style.css';
-import { Menu } from 'antd';
+import { Menu, } from 'antd';
 import axios from "axios";
-import { MailOutlined,TwitterOutlined,WechatOutlined } from '@ant-design/icons';
+import { MailOutlined, TwitterOutlined, WechatOutlined, } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
 
 //HOOK使用
@@ -21,13 +21,13 @@ function AppHeader(){
     //     {id: 3, icon: 'WechatOutlined', title: '微信'},
     //     {id: 4, icon: 'BookOutlined', title: '图书'},
     // ]);
-   
+    
     //使用HOOKS
     const [list, setList] = useState([]);
 
     useEffect(() => {
         //从后端获取JSON数据
-        axios.get('https://rap2.mez100.com/rapserver/app/mock/56/headermenus')
+        axios.get('https://dev-v2.bundleb2b.net/apidoc-server/app/mock/56/headermenus')
         .then(async res => {
             await setList(res.data.data);
         })
@@ -65,7 +65,7 @@ function AppHeader(){
                     </Link>
                     </Menu.Item>
                 
-               
+                
             )
         });
     };
@@ -81,7 +81,7 @@ function AppHeader(){
                 {getMenuItems()}  
             </Menu>
         </Fragment>
-       
+
     )
 }
 

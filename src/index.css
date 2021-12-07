@@ -15,16 +15,17 @@ code {
 }
 
 .header {
-  background: #fff;
-  border-bottom: 1px solid #999;
+  background: #FFFFFF;
 }
 
+
+
 .content {
-  background: rgb(240, 233, 233);
-  border-bottom: 1px solid #888;
-  min-height: 300px;
+  background: #E2E3DF;
+  min-height: 500px;
 }
 
 .footer {
+  background: #79888d;
   text-align: center;
 }

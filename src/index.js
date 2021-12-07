@@ -6,6 +6,7 @@ import Router from './router';
 import { BrowserRouter } from 'react-router-dom';
 import AppHeader from './components/Header';
 import AppFooter from './components/Footer';
+import Login from './components/Login';
 
 const { Header, Footer, Content } = Layout;
 
@@ -15,6 +16,7 @@ function App() {
         <Layout style={{minWidth:'1000px'}}>
           <Header className="header">
             <AppHeader />
+            <Login />
           </Header>
           <Content className="content">
             <Router />
@@ -29,8 +31,8 @@ function App() {
 
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  // <React.StrictMode>
+    <App />,
+  // </React.StrictMode>,
   document.getElementById('root')
 );

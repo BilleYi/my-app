@@ -14,13 +14,13 @@ const IconText = ({ icon, text }) => (
 class MusicReview extends Component {
     constructor(props) {
         super(props);
-        this.state = {listData: []}
+        this.state = { listData: [] }
     }
 
     render() {
         return (
             <List
-                className = "page-list"
+                className="page-list"
                 itemLayout="vertical"
                 size="small"
                 pagination={{
@@ -37,24 +37,24 @@ class MusicReview extends Component {
                 }
                 renderItem={item => (
                     <List.Item
-                        key={item.songId}
+                        key={item.id}
                         actions={[
                             <IconText icon={StarOutlined} text="666" key="list-vertical-star-o" />,
-                            <IconText icon={LikeOutlined} text={item.likedCount} key="list-vertical-like-o" />,
+                            <IconText icon={LikeOutlined} text={item.liked} key="list-vertical-like-o" />,
                             <IconText icon={MessageOutlined} text="6" key="list-vertical-message" />,
                         ]}
                         extra={
                             <img
                                 width={100}
                                 alt="logo"
-                                src={item.songPic}
+                                src={item.pic}
                             />
                         }
                     >
                         <List.Item.Meta
                             avatar={<Avatar src={item.avatar} />}
-                            title={<a href={item.href}>{item.songName}</a>}
-                            description={item.nickname}
+                            title={<a href={item.href}>{item.title}</a>}
+                            description={item.description}
                         />
                         {item.content}
                     </List.Item>
@@ -63,18 +63,31 @@ class MusicReview extends Component {
         )
     }
 
-    
+    //异步请求API获取数据
+    async getInfo() {
+        let newData = [];
+        for (let i = 0; i < 5; i++) {
+            await axios.get('https://rap2.mez100.com/rapserver/app/mock/56/pages/1')//https://api.muxiaoguo.cn/api/163reping
+                .then(res => {
+                    newData.push({
+                        href: '#',
+                        id: res.data.data.songId,
+                        title: res.data.data.nickname,
+                        avatar: res.data.data.avatar,
+                        description: res.data.data.songName,
+                        content: res.data.data.content,
+                        pic: res.data.data.songPic,
+                        liked: res.data.data.likedCount,
+                    });
+                })
+                .catch(error => console.log(error));
+        }
+        await this.setState(state => { return { listData: newData } })
+    }
+
     componentDidMount = () => {
         // console.log('前',this.state.listData)
-        //异步请求API获取数据
-        //https://api.muxiaoguo.cn/api/163reping
-        axios.get('https://dev-v2.bundleb2b.net/apidoc-server/app/mock/56/pages/1')
-            .then(res => {
-                // console.log(res.data.data);
-                this.setState({ listData: res.data.data });
-            })
-            .catch(error => console.log(error));
-
+        this.getInfo()
         // console.log('后',this.state.listData)
     }
 
