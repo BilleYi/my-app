@@ -8,12 +8,17 @@ export default function NewsInfo() {
     const [data, setData] = useState([]);
 
     useEffect(() => {
+        let isMounted = true;
         //从后端获取JSON数据
         axios.get('https://dev-v2.bundleb2b.net/apidoc-server/app/mock/56/pages/3')
             .then(res => {
-                setData(res.data.data);
+                if (isMounted) {
+                    setData(res.data.data);
+                }
+                
             })
-            .catch(err => console.error(err))
+            .catch(err => console.error('NewsInfo',err));
+        return () => isMounted = false;
     }, [])
 
     return (

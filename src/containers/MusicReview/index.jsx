@@ -73,7 +73,7 @@ class MusicReview extends Component {
                 // console.log(res.data.data);
                 this.setState({ listData: res.data.data });
             })
-            .catch(error => console.log(error));
+            .catch(error => console.log('MusicReview',error));
 
         // console.log('后',this.state.listData)
     }

@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from 'react';
+import React from 'react';
 import { Form, Input, Checkbox } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import store from '../../store';
@@ -6,20 +6,8 @@ import { getUsernameChangeAction, getPasswordChangeAction } from '../../store/ac
 
 export default function LoginForm(props) {
     //表单逻辑
-    //redux逻辑
-    const [data, setData] = useState(store.getState());
-
-    const handleStoreChange = () => {//store数据更新事件
-        setData(store.getState());
-    }
-
-    store.subscribe(handleStoreChange);//订阅reducer
-
-    // useEffect(() => {
-    //     console.log(data)
-    // },[])
-
-    //输入框用户名或密码改变
+    
+    //输入框用户名或密码改变更新redux数据
     const userInfoChange = (e) => {
         if (e.username) {
             const action = getUsernameChangeAction(e.username);

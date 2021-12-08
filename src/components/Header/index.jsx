@@ -26,12 +26,16 @@ function AppHeader(){
     const [list, setList] = useState([]);
 
     useEffect(() => {
+        let isMounted = true;
         //从后端获取JSON数据
         axios.get('https://dev-v2.bundleb2b.net/apidoc-server/app/mock/56/headermenus')
-        .then(async res => {
-            await setList(res.data.data);
+        .then(res => {
+            if (isMounted) {
+                setList(res.data.data);
+            }
         })
-        .catch(err => console.error(err))
+        .catch(err => console.error('Header',err));
+        return () => isMounted = false;
     },[])
 
     //通过循环遍历返回需要渲染的组件

@@ -1,7 +1,7 @@
 /**
  * 统一创建action，提高代码可维护性
  */
-import { CHANGE_USERNAME_VALUE, CHANGE_PASSWORD_VALUE } from "./actionTypes"
+import { CHANGE_USERNAME_VALUE, CHANGE_PASSWORD_VALUE, CHANGE_LOGIN_VALUE } from "./actionTypes"
 
 const getUsernameChangeAction = (value) => ({
     type: CHANGE_USERNAME_VALUE,
@@ -13,5 +13,10 @@ const getPasswordChangeAction = (value) => ({
     value,
 })
 
+const getLoginChangeAction = (value) => ({
+    type: CHANGE_LOGIN_VALUE,
+    value,
+})
 
-export { getUsernameChangeAction, getPasswordChangeAction };
+
+export { getUsernameChangeAction, getPasswordChangeAction, getLoginChangeAction };
