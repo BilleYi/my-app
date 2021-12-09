@@ -1,25 +1,40 @@
-import React from 'react';
+import React, { useState, useEffect} from 'react';
 import { Form, Input, Checkbox } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
-import store from '../../store';
-import { getUsernameChangeAction, getPasswordChangeAction } from '../../store/actionCreators';
+// import store from '../../store';
+// import { getUsernameChangeAction, getPasswordChangeAction } from '../../store/actionCreators';
 
 export default function LoginForm(props) {
     //表单逻辑
     
+    const [data, setData] = useState({
+        username: '',
+        password: '',
+    })
+
     //输入框用户名或密码改变更新redux数据
     const userInfoChange = (e) => {
-        if (e.username) {
-            const action = getUsernameChangeAction(e.username);
-            store.dispatch(action);
+        if (e.username && e.password) {
+            setData({
+                username: e.username,
+                password: e.password
+            })
+        }
+
+        // if (e.username) {
+        //     const action = getUsernameChangeAction(e.username);
+        //     store.dispatch(action);
             
-        }
-        if (e.password) {
-            const action = getPasswordChangeAction(e.password);
-            store.dispatch(action);
-        }
-        
+        // }
+        // if (e.password) {
+        //     const action = getPasswordChangeAction(e.password);
+        //     store.dispatch(action);
+        // }
     }
+
+    useEffect(() => {
+        console.log(data);
+    })
 
     return (
         <Form

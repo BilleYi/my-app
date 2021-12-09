@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Button, Avatar, Modal } from 'antd';
 import { UserOutlined,CrownFilled  } from '@ant-design/icons';
 import './style.css';
-import LoginForm from './LoginForm';
+import LoginForm from './LoginForm-class';
 import store from '../../store';
 import axios from 'axios';
 import { getLoginChangeAction } from '../../store/actionCreators';
@@ -11,20 +11,18 @@ import { getLoginChangeAction } from '../../store/actionCreators';
 const Login = () => {
     //弹出框逻辑
 
-    //定义初始数据
+    //定义弹出框展示初始值
     const [isModalVisible, setIsModalVisible] = useState(false);
     // const [isLogin, setIsLogin] = useState(false);
 
     //redux数据获取
     const [state, setState] = useState(store.getState())
-
-    function updateState() {
-        store.subscribe(() => setState(store.getState()));//订阅reducer
-    }
+    //订阅reducer
+    store.subscribe(() => setState(store.getState()));
+    //定义用户初始信息
+    const [info, setInfo] = useState({value:'null'})
     
     
-    
-
     //数据sessionStorage本地储存逻辑
     const saveState = (state) => {
         try {
@@ -34,8 +32,6 @@ const Login = () => {
                 sessionStorage.setItem('state', serializedState);
             } else {
                 const clearState = {
-                    username: "",
-                    password: "",
                     isLogin: false,
                 };
                 const serializedState = JSON.stringify(clearState);
@@ -47,20 +43,18 @@ const Login = () => {
             console.error('Login saveState',err);
         }
     };
-    //页面刷新或关闭
+    //页面刷新或关闭时
     window.onbeforeunload = (e) => {
         saveState(state);
     };
 
+    //弹出框开关逻辑
     const showModal = () => {
         if (state.isLogin) {
             async function loginOut(){
                 const action = getLoginChangeAction(false);
                 await store.dispatch(action);
-                await updateState();
-                console.log(state)
                 alert('注销成功')
-                console.log(state)
             }
             loginOut()
             
@@ -69,19 +63,18 @@ const Login = () => {
         }
         
     };
-    //弹出框点击确认用户信息验证逻辑
+    //弹出框点击确认验证用户信息逻辑
     const handleOk = () => {
         
-        async function InformationValidation() {
-            await updateState();
-
+        function InformationValidation() {
+            
             axios.get('https://dev-v2.bundleb2b.net/apidoc-server/app/mock/56/login')
             .then((res) => {
                 // console.log('res is ',res.data.user)
                 // console.log('state is ',state)
                 const result = res.data.user;
-                if (result.username === state.username) {
-                    if (result.password === state.password) {
+                if (result.username === info.username) {
+                    if (result.password === info.password) {
                         alert('登录成功')
                         setIsModalVisible(false);
                         const action = getLoginChangeAction(true);
@@ -97,7 +90,16 @@ const Login = () => {
     const handleCancel = () => {
         setIsModalVisible(false);
     };
+    //获取子组件传值更新info
+    const getMessage = data => {
+        // console.log(data)
+        setInfo(data)
+        // console.log(info)
+    }
 
+    // useEffect(() => {
+    //     console.log('uef',info)
+    // },[info])
 
     return (
         <div className="user-login">
@@ -112,7 +114,7 @@ const Login = () => {
                 okText="确定" 
                 cancelText="取消"
             >
-                <LoginForm />
+                <LoginForm getMsg={getMessage}/>
             </Modal>
             <Avatar 
             className="login-avatar"
