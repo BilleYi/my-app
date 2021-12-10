@@ -7,6 +7,8 @@ import './style.css';
 export default function NewsInfo() {
     const [data, setData] = useState([]);
 
+    const [isLoading,setIsLoading]= useState(true);
+
     useEffect(() => {
         let isMounted = true;
         //从后端获取JSON数据
@@ -14,6 +16,8 @@ export default function NewsInfo() {
             .then(res => {
                 if (isMounted) {
                     setData(res.data.data);
+                    setIsLoading(false);
+                    
                 }
                 
             })
@@ -28,6 +32,7 @@ export default function NewsInfo() {
                 size="small"
                 bordered
                 dataSource={data}
+                loading={isLoading}
                 renderItem={item => 
                 <List.Item>
                     <Link to={`/pages/detail/${item.id}`}>{item.title}</Link>

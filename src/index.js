@@ -7,6 +7,8 @@ import { BrowserRouter } from 'react-router-dom';
 import AppHeader from './components/Header';
 import AppFooter from './components/Footer';
 import Login from './components/Login';
+import { Provider } from 'react-redux';
+import store from './store';
 
 const { Header, Footer, Content } = Layout;
 
@@ -19,7 +21,10 @@ function App() {
             <Login />
           </Header>
           <Content className="content">
-            <Router />
+            <Provider store={store}>
+              <Router />
+            </Provider>
+            
           </Content>
           <Footer className="footer">
             <AppFooter />

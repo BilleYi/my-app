@@ -24,8 +24,11 @@ code {
   background: #E2E3DF;
   min-height: 500px;
 }
+.ant-list-item {
+  justify-content: center;
+}
 
 .footer {
-  background: #79888d;
+  background: #8CC7B5 ;
   text-align: center;
 }

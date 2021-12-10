@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Button, Avatar, Modal } from 'antd';
+import React, { useState, useEffect } from 'react';
+import { Button, Avatar, Modal, message } from 'antd';
 import { UserOutlined,CrownFilled  } from '@ant-design/icons';
 import './style.css';
 import LoginForm from './LoginForm-class';
@@ -52,9 +52,9 @@ const Login = () => {
     const showModal = () => {
         if (state.isLogin) {
             async function loginOut(){
-                const action = getLoginChangeAction(false);
+                const action = getLoginChangeAction();
                 await store.dispatch(action);
-                alert('注销成功')
+                message.success('注销成功', 2)
             }
             loginOut()
             
@@ -75,12 +75,12 @@ const Login = () => {
                 const result = res.data.user;
                 if (result.username === info.username) {
                     if (result.password === info.password) {
-                        alert('登录成功')
+                        message.success('登录成功',2)
                         setIsModalVisible(false);
-                        const action = getLoginChangeAction(true);
+                        const action = getLoginChangeAction();
                         store.dispatch(action);
-                    } else alert('密码错误')
-                } else alert('用户名错误')
+                    } else message.error('密码错误', 1)
+                } else message.error('用户名错误',1)
                 
             }).catch(error => console.error('Login-axios',error))
         }
@@ -97,9 +97,10 @@ const Login = () => {
         // console.log(info)
     }
 
-    // useEffect(() => {
-    //     console.log('uef',info)
-    // },[info])
+    useEffect(() => {
+        // console.log('uef',info)
+        return () => setInfo({});
+    },[])
 
     return (
         <div className="user-login">
@@ -118,7 +119,7 @@ const Login = () => {
             </Modal>
             <Avatar 
             className="login-avatar"
-                icon={state.isLogin ? <CrownFilled /> : <UserOutlined />}
+                icon={state.isLogin ? <CrownFilled style={{color:'yellow'}}/> : <UserOutlined />}
             />
         </div>
         
