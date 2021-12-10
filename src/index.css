@@ -22,7 +22,7 @@ code {
 
 .content {
   background: #E2E3DF;
-  min-height: 500px;
+  min-height: 520px;
 }
 .ant-list-item {
   justify-content: center;
@@ -31,4 +31,5 @@ code {
 .footer {
   background: #8CC7B5 ;
   text-align: center;
+  max-height: 100px;
 }

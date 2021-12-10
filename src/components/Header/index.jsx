@@ -2,7 +2,7 @@
  * 头部组件
  */
 import React, { Fragment, useEffect, useState } from "react";
-import logo from "./logo.png";
+import logo from "./logo1.png";
 import './style.css';
 import { Menu, } from 'antd';
 import axios from "axios";
@@ -10,12 +10,8 @@ import { MailOutlined, TwitterOutlined, WechatOutlined, } from '@ant-design/icon
 import { Link } from 'react-router-dom';
 
 //HOOK使用
-function AppHeader(){
+function AppHeader(props) {
     // const [list, setList] = useState([//假数据模拟
-    //     // {id: 1, icon: <MailOutlined />, title: '邮件'},
-    //     // {id: 2, icon: <TwitterOutlined />, title: '推特'},
-    //     // {id: 3, icon: <WechatOutlined />, title: '微信'},
-    //     // {id: 4, icon: <BookOutlined />, title: '图书'},
     //     {id: 1, icon: 'MailOutlined', title: '邮件'},
     //     {id: 2, icon: 'TwitterOutlined', title: '推特'},
     //     {id: 3, icon: 'WechatOutlined', title: '微信'},
@@ -24,7 +20,7 @@ function AppHeader(){
     
     //使用HOOKS
     const [list, setList] = useState([]);
-
+    
     useEffect(() => {
         let isMounted = true;
         //从后端获取JSON数据
