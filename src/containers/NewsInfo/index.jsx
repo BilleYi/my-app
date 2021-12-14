@@ -4,40 +4,41 @@ import { List } from 'antd';
 import { Link } from 'react-router-dom';
 import './style.css';
 
+// eslint-disable-next-line react/function-component-definition
 export default function NewsInfo() {
-    const [data, setData] = useState([]);
+  const [data, setData] = useState([]);
 
-    const [isLoading,setIsLoading]= useState(true);
+  const [isLoading, setIsLoading] = useState(true);
 
-    useEffect(() => {
-        let isMounted = true;
-        //从后端获取JSON数据
-        axios.get('https://dev-v2.bundleb2b.net/apidoc-server/app/mock/56/pages/3')
-            .then(res => {
-                if (isMounted) {
-                    setData(res.data.data);
-                    setIsLoading(false);
-                    
-                }
-                
-            })
-            .catch(err => console.error('NewsInfo',err));
-        return () => isMounted = false;
-    }, [])
+  useEffect(() => {
+    let isMounted = true;
+    // 从后端获取JSON数据
+    axios
+      .get('https://dev-v2.bundleb2b.net/apidoc-server/app/mock/56/pages/3')
+      .then((res) => {
+        if (isMounted) {
+          setData(res.data.data);
+          setIsLoading(false);
+        }
+      })
+      .catch((err) => console.error('NewsInfo', err));
+    // eslint-disable-next-line no-return-assign
+    return () => (isMounted = false);
+  }, []);
 
-    return (
-        <div>
-            <List
-                className="news-info"
-                size="small"
-                bordered
-                dataSource={data}
-                loading={isLoading}
-                renderItem={item => 
-                <List.Item>
-                    <Link to={`/pages/detail/${item.id}`}>{item.title}</Link>
-                </List.Item>}
-            />
-        </div>
-    )
+  return (
+    <div>
+      <List
+        className="news-info"
+        size="small"
+        bordered
+        dataSource={data}
+        loading={isLoading}
+        renderItem={(item) => (
+          <List.Item>
+            <Link to={`/pages/detail/${item.id}`}>{item.title}</Link>
+          </List.Item>
+        )}/>
+    </div>
+  );
 }
