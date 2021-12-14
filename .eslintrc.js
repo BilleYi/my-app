@@ -23,13 +23,15 @@ module.exports = {
     "no-unsafe-optional-chaining": 0,
     "no-nonoctal-decimal-escape": 0,
     "import/no-extraneous-dependencies": 0,
-    "react/prop-types":0,
+    "react/prop-types": 0,
     "react/destructuring-assignment": 0,
     "no-console": 0,
     "func-names": 0,
     "default-param-last": 0,
     "react/function-component-definition": 0,
     "import/no-named-as-default": 0,
-    "import/no-named-as-default-member":0
+    "import/no-named-as-default-member": 0,
+    "arrow-body-style": "off",
+    "prefer-arrow-callback": "off",
   },
 };

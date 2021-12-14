@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { Result, Button, Card } from 'antd';
-import axios from 'axios';
-import store from '../../store';
-import './style.css';
+import React, { useState, useEffect } from "react";
+import { Result, Button, Card } from "antd";
+import axios from "axios";
+import store from "../../store";
+import "./style.css";
 
 const Detail = function (props) {
   const { history, match } = props;
@@ -37,7 +37,9 @@ const Detail = function (props) {
       <Card title={page.title}>
         <div
           className="detail"
-          dangerouslySetInnerHTML={{ __html: page.content }}/>
+          // eslint-disable-next-line react/no-danger
+          dangerouslySetInnerHTML={{ __html: page.content }}
+        />
       </Card>
     );
   }
@@ -50,7 +52,8 @@ const Detail = function (props) {
         <Button type="primary" onClick={handleBackClick}>
           返回
         </Button>
-      }/>
+      }
+    />
   );
 };
 
