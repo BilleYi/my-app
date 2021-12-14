@@ -31,3 +31,7 @@ mock 地址：https://rap2-api.bundleb2b.net/repository/editor?id=56
    > - 用户名：admin 密码：admin
 
 3. 注册功能（待开发。。。）
+
+### 功能演示
+
+![项目功能演示](./项目功能演示.gif)
