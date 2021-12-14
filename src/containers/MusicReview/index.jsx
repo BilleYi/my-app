@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
-import './style.css';
-import axios from 'axios';
-import { List, Avatar, Space } from 'antd';
-import { MessageOutlined, LikeOutlined, StarOutlined } from '@ant-design/icons';
+import React, { Component } from "react";
+import "./style.css";
+import axios from "axios";
+import { List, Avatar, Space } from "antd";
+import { MessageOutlined, LikeOutlined, StarOutlined } from "@ant-design/icons";
 
 const IconText = function ({ icon, text }) {
   return (
@@ -46,24 +46,30 @@ class MusicReview extends Component {
               <IconText
                 icon={StarOutlined}
                 text="666"
-                key="list-vertical-star-o"/>,
+                key="list-vertical-star-o"
+              />,
               <IconText
                 icon={LikeOutlined}
                 text={item.likedCount}
-                key="list-vertical-like-o"/>,
+                key="list-vertical-like-o"
+              />,
               <IconText
                 icon={MessageOutlined}
                 text="6"
-                key="list-vertical-message"/>,
+                key="list-vertical-message"
+              />,
             ]}
-            extra={<img width={100} alt="logo" src={item.songPic} />}>
+            extra={<img width={100} alt="logo" src={item.songPic} />}
+          >
             <List.Item.Meta
               avatar={<Avatar src={item.avatar} />}
               title={<a href={item.href}>{item.songName}</a>}
-              description={item.nickname}/>
+              description={item.nickname}
+            />
             {item.content}
           </List.Item>
-        )}/>
+        )}
+      />
     );
   }
 
@@ -72,15 +78,19 @@ class MusicReview extends Component {
     // 异步请求API获取数据
     // https://api.muxiaoguo.cn/api/163reping
     axios
-      .get('https://dev-v2.bundleb2b.net/apidoc-server/app/mock/56/pages/1')
+      .get("https://dev-v2.bundleb2b.net/apidoc-server/app/mock/56/pages/1")
       .then((res) => {
         // console.log(res.data.data);
         this.setState({ listData: res.data.data });
         this.setState({ isLoading: false });
       })
-      .catch((error) => console.log('MusicReview', error));
+      .catch((error) => console.log("MusicReview", error));
 
     // console.log('后',this.state.listData)
+  }
+
+  componentWillUnmount() {
+    this.setState = () => null;
   }
 }
 

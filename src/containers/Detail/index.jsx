@@ -1,18 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Result, Button, Card } from "antd";
+import { connect } from "react-redux";
 import axios from "axios";
-import store from "../../store";
 import "./style.css";
 
 const Detail = function (props) {
   const { history, match } = props;
-  // redux数据获取
-  const [state, setState] = useState(store.getState());
-  const handleStoreChange = () => {
-    // store数据更新事件
-    setState(store.getState());
-  };
-  store.subscribe(handleStoreChange); // 订阅reducer
 
   const [page, setPage] = useState({});
 
@@ -32,7 +25,7 @@ const Detail = function (props) {
     return () => setPage({});
   }, [match.params, match.params.id]);
 
-  if (state.isLogin) {
+  if (props.isLogin) {
     return (
       <Card title={page.title}>
         <div
@@ -57,4 +50,10 @@ const Detail = function (props) {
   );
 };
 
-export default Detail;
+const mapStateToProps = (state) => {
+  return {
+    isLogin: state.isLogin,
+  };
+};
+
+export default connect(mapStateToProps, null)(Detail);
