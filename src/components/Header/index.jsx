@@ -1,18 +1,18 @@
 /**
  * 头部组件
  */
-import React, { useEffect, useState } from "react";
-import "./style.css";
-import { Menu } from "antd";
-import axios from "axios";
+import React, { useEffect, useState } from "react"
+import "./style.css"
+import { Menu } from "antd"
+import axios from "axios"
 
 import {
   MailOutlined,
   TwitterOutlined,
   WechatOutlined,
-} from "@ant-design/icons";
-import { Link } from "react-router-dom";
-import logo from "./logo1.png";
+} from "@ant-design/icons"
+import { Link } from "react-router-dom"
+import logo from "./logo1.png"
 
 // HOOK使用
 const AppHeader = function () {
@@ -24,51 +24,51 @@ const AppHeader = function () {
   // ]);
 
   // 使用HOOKS
-  const [list, setList] = useState([]);
+  const [list, setList] = useState([])
 
   useEffect(() => {
-    let isMounted = true;
+    let isMounted = true
     // 从后端获取JSON数据
     axios
       .get("https://dev-v2.bundleb2b.net/apidoc-server/app/mock/56/headermenus")
       .then((res) => {
         if (isMounted) {
-          setList(res.data.data);
+          setList(res.data.data)
         }
       })
-      .catch((err) => console.error("Header", err));
+      .catch((err) => console.error("Header", err))
 
     return () => {
-      isMounted = false;
-    };
-  }, []);
+      isMounted = false
+    }
+  }, [])
 
   // 通过循环遍历返回需要渲染的组件
   function getMenuItems() {
     return list.map((item) => {
       // 从后台获取JSON数据，通过icon值匹配对应的icon组件并返回
-      let icon;
+      let icon
       switch (item.icon) {
         case "MailOutlined":
-          icon = <MailOutlined />;
-          break;
+          icon = <MailOutlined />
+          break
         case "TwitterOutlined":
-          icon = <TwitterOutlined />;
-          break;
+          icon = <TwitterOutlined />
+          break
         case "WechatOutlined":
-          icon = <WechatOutlined />;
-          break;
+          icon = <WechatOutlined />
+          break
         default:
-          console.log("没有匹配相应的ICON");
-          icon = null;
+          console.log("没有匹配相应的ICON")
+          icon = null
       }
 
       return (
         <Menu.Item key={item.id} icon={icon}>
           <Link to={`/pages/${item.id}`}>{item.title}</Link>
         </Menu.Item>
-      );
-    });
+      )
+    })
   }
   // console.log(Array.isArray(getMenuItems()))//true
   // console.log(...getMenuItems());
@@ -82,7 +82,7 @@ const AppHeader = function () {
         {getMenuItems()}
       </Menu>
     </>
-  );
-};
+  )
+}
 
-export default AppHeader;
+export default AppHeader

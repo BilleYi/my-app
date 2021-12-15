@@ -1,10 +1,10 @@
-import React from 'react';
+import React from "react"
 
-const AppFooter = function() {
+const AppFooter = function () {
   return (
     <h2>
       <em>Build by Bille.yi</em>
     </h2>
-  );
+  )
 }
-export default AppFooter;
+export default AppFooter

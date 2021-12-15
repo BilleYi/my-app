@@ -1,41 +1,28 @@
-import React, { useState, useEffect } from 'react';
-import { Form, Input, Checkbox } from 'antd';
-import { UserOutlined, LockOutlined } from '@ant-design/icons';
-// import store from '../../store';
-// import { getUsernameChangeAction, getPasswordChangeAction } from '../../store/actionCreators';
+import React, { useState, useEffect } from "react"
+import { Form, Input, Checkbox } from "antd"
+import { UserOutlined, LockOutlined } from "@ant-design/icons"
 
-// eslint-disable-next-line react/function-component-definition
 export default function LoginForm() {
   // 表单逻辑
 
   const [data, setData] = useState({
-    username: '',
-    password: '',
-  });
+    username: "",
+    password: "",
+  })
 
   // 输入框用户名或密码改变更新redux数据
   const userInfoChange = (e) => {
-    if (e.username && e.password) {
+    if (e.username || e.password) {
       setData({
         username: e.username,
         password: e.password,
-      });
+      })
     }
-
-    // if (e.username) {
-    //     const action = getUsernameChangeAction(e.username);
-    //     store.dispatch(action);
-
-    // }
-    // if (e.password) {
-    //     const action = getPasswordChangeAction(e.password);
-    //     store.dispatch(action);
-    // }
-  };
+  }
 
   useEffect(() => {
-    console.log(data);
-  });
+    console.log(data)
+  })
 
   return (
     <Form
@@ -44,18 +31,21 @@ export default function LoginForm() {
       initialValues={{
         remember: true,
       }}
-      onValuesChange={userInfoChange}>
+      onValuesChange={userInfoChange}
+    >
       <Form.Item
         name="username"
         rules={[
           {
             required: true,
-            message: '请输入用户名',
+            message: "请输入用户名",
           },
-        ]}>
+        ]}
+      >
         <Input
           prefix={<UserOutlined className="site-form-item-icon" />}
-          placeholder="Username"/>
+          placeholder="Username"
+        />
       </Form.Item>
 
       <Form.Item
@@ -63,18 +53,20 @@ export default function LoginForm() {
         rules={[
           {
             required: true,
-            message: '请输入密码',
+            message: "请输入密码",
           },
-        ]}>
+        ]}
+      >
         <Input
           prefix={<LockOutlined className="site-form-item-icon" />}
           type="password"
-          placeholder="Password"/>
+          placeholder="Password"
+        />
       </Form.Item>
 
       <Form.Item name="remember" valuePropName="checked" noStyle>
         <Checkbox>记住密码</Checkbox>
       </Form.Item>
     </Form>
-  );
+  )
 }

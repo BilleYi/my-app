@@ -1,29 +1,29 @@
-import React, { useState, useEffect } from "react";
-import { Result, Button, Card } from "antd";
-import { connect } from "react-redux";
-import axios from "axios";
-import "./style.css";
+import React, { useState, useEffect } from "react"
+import { Result, Button, Card } from "antd"
+import { connect } from "react-redux"
+import axios from "axios"
+import "./style.css"
 
 const Detail = function (props) {
-  const { history, match } = props;
+  const { history, match } = props
 
-  const [page, setPage] = useState({});
+  const [page, setPage] = useState({})
 
   const handleBackClick = () => {
-    history.goBack();
-  };
+    history.goBack()
+  }
 
   useEffect(() => {
-    const { id } = match.params;
+    const { id } = match.params
     axios
       .get(`http://www.dell-lee.com/react/api/detail.json?id=${id}`)
       .then((res) => {
-        const { data } = res.data;
-        setPage(data);
-      });
+        const { data } = res.data
+        setPage(data)
+      })
 
-    return () => setPage({});
-  }, [match.params, match.params.id]);
+    return () => setPage({})
+  }, [match.params, match.params.id])
 
   if (props.isLogin) {
     return (
@@ -34,7 +34,7 @@ const Detail = function (props) {
           dangerouslySetInnerHTML={{ __html: page.content }}
         />
       </Card>
-    );
+    )
   }
   return (
     <Result
@@ -47,13 +47,13 @@ const Detail = function (props) {
         </Button>
       }
     />
-  );
-};
+  )
+}
 
 const mapStateToProps = (state) => {
   return {
     isLogin: state.isLogin,
-  };
-};
+  }
+}
 
-export default connect(mapStateToProps, null)(Detail);
+export default connect(mapStateToProps, null)(Detail)

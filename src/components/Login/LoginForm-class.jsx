@@ -1,14 +1,14 @@
-import React from "react";
-import { Form, Input, Checkbox } from "antd";
-import { UserOutlined, LockOutlined } from "@ant-design/icons";
+import React from "react"
+import { Form, Input, Checkbox } from "antd"
+import { UserOutlined, LockOutlined } from "@ant-design/icons"
 
 class LoginForm extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       username: "",
       password: "",
-    };
+    }
   }
 
   // 输入框用户名或密码改变向父组件传递最新数据
@@ -18,24 +18,24 @@ class LoginForm extends React.Component {
       Promise.resolve()
         .then(() => {
           // console.log('befor',this.state);
-          this.setState({ username: e.username });
+          this.setState({ username: e.username })
           // console.log('after',this.state)
         })
         .then(() => {
-          this.props.getMsg(this.state);
-        });
+          this.props.getMsg(this.state)
+        })
     }
     if (e.password) {
       Promise.resolve().then(() => {
-        this.setState({ password: e.password });
-        this.props.getMsg(this.state);
-      });
+        this.setState({ password: e.password })
+        this.props.getMsg(this.state)
+      })
     }
 
     if (e.remember) {
       Promise.resolve().then(() => {
-        this.setState({ password: e.password });
-      });
+        this.setState({ password: e.password })
+      })
     }
   };
 
@@ -86,8 +86,8 @@ class LoginForm extends React.Component {
           </Checkbox>
         </Form.Item>
       </Form>
-    );
+    )
   }
 }
 
-export default LoginForm;
+export default LoginForm

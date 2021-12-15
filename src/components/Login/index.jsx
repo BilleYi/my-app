@@ -1,65 +1,65 @@
-import React, { useState } from "react";
-import { Button, Avatar, Modal, message } from "antd";
-import { UserOutlined, CrownFilled } from "@ant-design/icons";
-import "./style.css";
-import axios from "axios";
-import LoginForm from "./LoginForm-class";
-import store from "../../store";
-import { getLoginChangeAction } from "../../store/actionCreators";
+import React, { useState } from "react"
+import { Button, Avatar, Modal, message } from "antd"
+import { UserOutlined, CrownFilled } from "@ant-design/icons"
+import "./style.css"
+import axios from "axios"
+import LoginForm from "./LoginForm-class"
+import store from "../../store"
+import { getLoginChangeAction } from "../../store/actionCreators"
 
 const Login = function () {
   // 弹出框逻辑
 
   // 定义弹出框展示初始值
-  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [isModalVisible, setIsModalVisible] = useState(false)
   // const [isLogin, setIsLogin] = useState(false);
 
   // redux数据获取
-  const [state, setState] = useState(store.getState());
+  const [state, setState] = useState(store.getState())
   // 订阅reducer
-  store.subscribe(() => setState(store.getState()));
+  store.subscribe(() => setState(store.getState()))
   // 定义用户初始信息
-  const [info, setInfo] = useState({ value: "null" });
+  const [info, setInfo] = useState({ value: "null" })
 
   // 数据sessionStorage本地储存逻辑
   const saveState = () => {
     try {
       // 判断登录状态，储存状态信息
       if (state.isLogin) {
-        const serializedState = JSON.stringify(state);
-        sessionStorage.setItem("state", serializedState);
+        const serializedState = JSON.stringify(state)
+        sessionStorage.setItem("state", serializedState)
       } else {
         const clearState = {
           isLogin: false,
-        };
-        const serializedState = JSON.stringify(clearState);
-        sessionStorage.setItem("state", serializedState);
+        }
+        const serializedState = JSON.stringify(clearState)
+        sessionStorage.setItem("state", serializedState)
       }
     } catch (err) {
       // ...错误处理
-      console.error("Login saveState", err);
+      console.error("Login saveState", err)
     }
-  };
+  }
   // 页面刷新或关闭时
   window.onbeforeunload = () => {
-    saveState(state);
-  };
+    saveState(state)
+  }
 
   // 弹出框开关逻辑
   const showModal = () => {
     if (state.isLogin) {
       Promise.resolve()
         .then(() => {
-          const action = getLoginChangeAction();
-          store.dispatch(action);
+          const action = getLoginChangeAction()
+          store.dispatch(action)
         })
         .then(() => {
-          message.success("注销成功", 2);
-        });
+          message.success("注销成功", 2)
+        })
     } else {
-      setIsModalVisible(true);
+      setIsModalVisible(true)
     }
-  };
+  }
   // 弹出框点击确认验证用户信息逻辑
   const handleOk = () => {
     function InformationValidation() {
@@ -68,30 +68,30 @@ const Login = function () {
         .then((res) => {
           // console.log('res is ',res.data.user)
           // console.log('state is ',state)
-          const result = res.data.user;
+          const result = res.data.user
           if (result.username === info.username) {
             if (result.password === info.password) {
-              message.success("登录成功", 2);
-              setIsModalVisible(false);
-              const action = getLoginChangeAction();
-              store.dispatch(action);
-            } else message.error("密码错误", 1);
-          } else message.error("用户名错误", 1);
+              message.success("登录成功", 2)
+              setIsModalVisible(false)
+              const action = getLoginChangeAction()
+              store.dispatch(action)
+            } else message.error("密码错误", 1)
+          } else message.error("用户名错误", 1)
         })
-        .catch((error) => console.error("Login-axios", error));
+        .catch((error) => console.error("Login-axios", error))
     }
-    InformationValidation();
-  };
+    InformationValidation()
+  }
 
   const handleCancel = () => {
-    setIsModalVisible(false);
-  };
+    setIsModalVisible(false)
+  }
   // 获取子组件传值更新info
   const getMessage = (data) => {
     // console.log(data)
-    setInfo(data);
+    setInfo(data)
     // console.log(info)
-  };
+  }
 
   return (
     <div className="user-login">
@@ -119,7 +119,7 @@ const Login = function () {
         }
       />
     </div>
-  );
-};
+  )
+}
 
-export default Login;
+export default Login

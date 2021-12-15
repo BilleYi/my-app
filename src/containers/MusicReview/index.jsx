@@ -1,8 +1,8 @@
-import React, { Component } from "react";
-import "./style.css";
-import axios from "axios";
-import { List, Avatar, Space } from "antd";
-import { MessageOutlined, LikeOutlined, StarOutlined } from "@ant-design/icons";
+import React, { Component } from "react"
+import "./style.css"
+import axios from "axios"
+import { List, Avatar, Space } from "antd"
+import { MessageOutlined, LikeOutlined, StarOutlined } from "@ant-design/icons"
 
 const IconText = function ({ icon, text }) {
   return (
@@ -10,16 +10,35 @@ const IconText = function ({ icon, text }) {
       {React.createElement(icon)}
       {text}
     </Space>
-  );
-};
+  )
+}
 
 class MusicReview extends Component {
   constructor(props) {
-    super(props);
-    this.state = { listData: [], isLoading: true };
+    super(props)
+    this.state = { listData: [], isLoading: true }
   }
 
-  // eslint-disable-next-line react/sort-comp
+  componentDidMount() {
+    // console.log('前',this.state.listData)
+    // 异步请求API获取数据
+    // https://api.muxiaoguo.cn/api/163reping
+    axios
+      .get("https://dev-v2.bundleb2b.net/apidoc-server/app/mock/56/pages/1")
+      .then((res) => {
+        // console.log(res.data.data);
+        this.setState({ listData: res.data.data })
+        this.setState({ isLoading: false })
+      })
+      .catch((error) => console.log("MusicReview", error))
+
+    // console.log('后',this.state.listData)
+  }
+
+  componentWillUnmount() {
+    this.setState = () => null
+  }
+
   render() {
     return (
       <List
@@ -28,7 +47,7 @@ class MusicReview extends Component {
         size="small"
         pagination={{
           onChange: (page) => {
-            console.log(page);
+            console.log(page)
           },
           pageSize: 5,
         }}
@@ -70,28 +89,8 @@ class MusicReview extends Component {
           </List.Item>
         )}
       />
-    );
-  }
-
-  componentDidMount() {
-    // console.log('前',this.state.listData)
-    // 异步请求API获取数据
-    // https://api.muxiaoguo.cn/api/163reping
-    axios
-      .get("https://dev-v2.bundleb2b.net/apidoc-server/app/mock/56/pages/1")
-      .then((res) => {
-        // console.log(res.data.data);
-        this.setState({ listData: res.data.data });
-        this.setState({ isLoading: false });
-      })
-      .catch((error) => console.log("MusicReview", error));
-
-    // console.log('后',this.state.listData)
-  }
-
-  componentWillUnmount() {
-    this.setState = () => null;
+    )
   }
 }
 
-export default MusicReview;
+export default MusicReview

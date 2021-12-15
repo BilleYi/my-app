@@ -16,7 +16,7 @@ module.exports = {
   rules: {
     "react/require-default-props": 0,
     "linebreak-style": [0, "error", "windows"],
-    semi: ["error", "always"],
+    semi: ["error", "never"],
     "no-param-reassign": 0,
     "react/jsx-filename-extension": [2, { extensions: ["js", "jsx"] }],
     "import/no-extraneous-denpendencies": 0,
@@ -35,4 +35,4 @@ module.exports = {
     "arrow-body-style": "off",
     "prefer-arrow-callback": "off",
   },
-};
+}
