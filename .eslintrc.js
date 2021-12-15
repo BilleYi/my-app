@@ -4,6 +4,7 @@ module.exports = {
     es2020: true,
   },
   extends: ["airbnb", "airbnb/hooks", "prettier"],
+  parser: "babel-eslint",
   parserOptions: {
     ecmaFeatures: {
       jsx: true,
@@ -15,7 +16,7 @@ module.exports = {
   rules: {
     "react/require-default-props": 0,
     "linebreak-style": [0, "error", "windows"],
-    semi: 0,
+    semi: ["error", "always"],
     "no-param-reassign": 0,
     "react/jsx-filename-extension": [2, { extensions: ["js", "jsx"] }],
     "import/no-extraneous-denpendencies": 0,

@@ -1,13 +1,13 @@
-import React from 'react';
-import { Form, Input, Checkbox } from 'antd';
-import { UserOutlined, LockOutlined } from '@ant-design/icons';
+import React from "react";
+import { Form, Input, Checkbox } from "antd";
+import { UserOutlined, LockOutlined } from "@ant-design/icons";
 
 class LoginForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: '',
-      password: '',
+      username: "",
+      password: "",
     };
   }
 
@@ -15,12 +15,27 @@ class LoginForm extends React.Component {
   userInfoChange = async (e) => {
     // console.log(e)
     if (e.username) {
-      await this.setState({ username: e.username });
-      this.props.getMsg(this.state);
+      Promise.resolve()
+        .then(() => {
+          // console.log('befor',this.state);
+          this.setState({ username: e.username });
+          // console.log('after',this.state)
+        })
+        .then(() => {
+          this.props.getMsg(this.state);
+        });
     }
     if (e.password) {
-      await this.setState({ password: e.password });
-      this.props.getMsg(this.state);
+      Promise.resolve().then(() => {
+        this.setState({ password: e.password });
+        this.props.getMsg(this.state);
+      });
+    }
+
+    if (e.remember) {
+      Promise.resolve().then(() => {
+        this.setState({ password: e.password });
+      });
     }
   };
 
@@ -32,18 +47,21 @@ class LoginForm extends React.Component {
         initialValues={{
           remember: true,
         }}
-        onValuesChange={this.userInfoChange}>
+        onValuesChange={this.userInfoChange}
+      >
         <Form.Item
           name="username"
           rules={[
             {
               required: true,
-              message: '请输入用户名',
+              message: "请输入用户名",
             },
-          ]}>
+          ]}
+        >
           <Input
             prefix={<UserOutlined className="site-form-item-icon" />}
-            placeholder="Username"/>
+            placeholder="Username"
+          />
         </Form.Item>
 
         <Form.Item
@@ -51,17 +69,21 @@ class LoginForm extends React.Component {
           rules={[
             {
               required: true,
-              message: '请输入密码',
+              message: "请输入密码",
             },
-          ]}>
+          ]}
+        >
           <Input
             prefix={<LockOutlined className="site-form-item-icon" />}
             type="password"
-            placeholder="Password"/>
+            placeholder="Password"
+          />
         </Form.Item>
 
         <Form.Item name="remember" valuePropName="checked" noStyle>
-          <Checkbox>{`${this.state.username}---${this.state.password}`}</Checkbox>
+          <Checkbox>
+            记住账号密码{`${this.state.username}---${this.state.password}`}
+          </Checkbox>
         </Form.Item>
       </Form>
     );
