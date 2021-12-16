@@ -13,7 +13,7 @@ export default function NewsInfo() {
     let isMounted = true
     // 从后端获取JSON数据
     axios
-      .get("https://dev-v2.bundleb2b.net/apidoc-server/app/mock/56/pages/3")
+      .get("/pages/3")
       .then((res) => {
         if (isMounted) {
           setData(res.data.data)

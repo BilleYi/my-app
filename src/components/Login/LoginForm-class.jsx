@@ -31,12 +31,6 @@ class LoginForm extends React.Component {
         this.props.getMsg(this.state)
       })
     }
-
-    if (e.remember) {
-      Promise.resolve().then(() => {
-        this.setState({ password: e.password })
-      })
-    }
   };
 
   render() {
@@ -81,9 +75,7 @@ class LoginForm extends React.Component {
         </Form.Item>
 
         <Form.Item name="remember" valuePropName="checked" noStyle>
-          <Checkbox>
-            记住账号密码{`${this.state.username}---${this.state.password}`}
-          </Checkbox>
+          <Checkbox>记住账号</Checkbox>
         </Form.Item>
       </Form>
     )

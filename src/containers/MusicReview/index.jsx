@@ -24,7 +24,7 @@ class MusicReview extends Component {
     // 异步请求API获取数据
     // https://api.muxiaoguo.cn/api/163reping
     axios
-      .get("https://dev-v2.bundleb2b.net/apidoc-server/app/mock/56/pages/1")
+      .get("/pages/1")
       .then((res) => {
         // console.log(res.data.data);
         this.setState({ listData: res.data.data })

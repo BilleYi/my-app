@@ -12,7 +12,7 @@ import {
   WechatOutlined,
 } from "@ant-design/icons"
 import { Link } from "react-router-dom"
-import logo from "./logo1.png"
+import logo from "./logo.png"
 
 // HOOK使用
 const AppHeader = function () {
@@ -30,7 +30,7 @@ const AppHeader = function () {
     let isMounted = true
     // 从后端获取JSON数据
     axios
-      .get("https://dev-v2.bundleb2b.net/apidoc-server/app/mock/56/headermenus")
+      .get("/headermenus")
       .then((res) => {
         if (isMounted) {
           setList(res.data.data)

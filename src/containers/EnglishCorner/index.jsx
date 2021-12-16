@@ -13,7 +13,7 @@ export default function EnglishCorner() {
     let isMounted = true
     // 从后端获取JSON数据
     axios
-      .get("https://dev-v2.bundleb2b.net/apidoc-server/app/mock/56/pages/2")
+      .get("/pages/2")
       .then((res) => {
         if (isMounted) {
           setData(res.data.data)
