@@ -29,7 +29,7 @@ const Detail = function (props) {
 
   if (isLogin) {
     return (
-      <Card title={page.title}>
+      <Card title={page.title} headStyle={{ textAlign: "center" }}>
         <div
           className="detail"
           // eslint-disable-next-line react/no-danger

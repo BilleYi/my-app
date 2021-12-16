@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react"
 import axios from "axios"
+import { useSelector } from "react-redux"
 import { List } from "antd"
 import { Link } from "react-router-dom"
 import "./style.css"
 
 export default function NewsInfo() {
   const [data, setData] = useState([])
-
+  const { isLogin } = useSelector((state) => state.loginInfo)
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
@@ -16,7 +17,7 @@ export default function NewsInfo() {
       .get("/pages/3")
       .then((res) => {
         if (isMounted) {
-          setData(res.data.data)
+          setData(res.data.result)
           setIsLoading(false)
         }
       })
@@ -35,11 +36,19 @@ export default function NewsInfo() {
         bordered
         dataSource={data}
         loading={isLoading}
-        renderItem={(item) => (
-          <List.Item>
-            <Link to={`/pages/detail/${item.id}`}>{item.title}</Link>
-          </List.Item>
-        )}
+        renderItem={(item) =>
+          isLogin ? (
+            <List.Item>
+              <a href={item.path}>{`${item.title}-----${item.time}`}</a>
+            </List.Item>
+          ) : (
+            <List.Item>
+              <Link to={`/pages/detail/${item.id}`}>
+                {`${item.title}-----${item.time}`}
+              </Link>
+            </List.Item>
+          )
+        }
       />
     </div>
   )
