@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react"
 import { Result, Button, Card } from "antd"
-import { connect } from "react-redux"
+import { useSelector } from "react-redux"
 import axios from "axios"
 import "./style.css"
 
@@ -8,6 +8,8 @@ const Detail = function (props) {
   const { history, match } = props
 
   const [page, setPage] = useState({})
+
+  const { isLogin } = useSelector((state) => state.loginInfo)
 
   const handleBackClick = () => {
     history.goBack()
@@ -25,7 +27,7 @@ const Detail = function (props) {
     return () => setPage({})
   }, [match.params, match.params.id])
 
-  if (props.isLogin) {
+  if (isLogin) {
     return (
       <Card title={page.title}>
         <div
@@ -50,10 +52,4 @@ const Detail = function (props) {
   )
 }
 
-const mapStateToProps = (state) => {
-  return {
-    isLogin: state.isLogin,
-  }
-}
-
-export default connect(mapStateToProps, null)(Detail)
+export default Detail

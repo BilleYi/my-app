@@ -9,26 +9,27 @@ import AppHeader from "./components/Header"
 import AppFooter from "./components/Footer"
 import Login from "./components/Login"
 import store from "./store"
+import "./utils/http"
 
 const { Header, Footer, Content } = Layout
 
 const App = function () {
   return (
     <BrowserRouter>
-      <Layout style={{ minWidth: "1000px" }}>
-        <Header className="header">
-          <AppHeader />
-          <Login />
-        </Header>
-        <Content className="content">
-          <Provider store={store}>
+      <Provider store={store}>
+        <Layout style={{ minWidth: "1000px" }}>
+          <Header className="header">
+            <AppHeader />
+            <Login />
+          </Header>
+          <Content className="content">
             <Router />
-          </Provider>
-        </Content>
-        <Footer className="footer">
-          <AppFooter />
-        </Footer>
-      </Layout>
+          </Content>
+          <Footer className="footer">
+            <AppFooter />
+          </Footer>
+        </Layout>
+      </Provider>
     </BrowserRouter>
   )
 }
