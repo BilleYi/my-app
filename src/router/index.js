@@ -1,9 +1,9 @@
-import { Route, Switch } from 'react-router-dom'
-import React from 'react'
-import MusicReview from '../containers/MusicReview'
-import EnglishCorner from '../containers/EnglishCorner'
-import NewsInfo from '../containers/NewsInfo'
-import Detail from '../containers/Detail'
+import { Route, Switch } from "react-router-dom"
+import React from "react"
+import MusicReview from "../containers/MusicReview/index-netapi"
+import EnglishCorner from "../containers/EnglishCorner"
+import NewsInfo from "../containers/NewsInfo"
+import Detail from "../containers/Detail"
 
 export default function Router() {
   return (
