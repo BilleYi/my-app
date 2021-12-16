@@ -64,7 +64,7 @@ const Login = function () {
   const handleOk = () => {
     function InformationValidation() {
       axios
-        .get("https://dev-v2.bundleb2b.net/apidoc-server/app/mock/56/login")
+        .get("/login")
         .then((res) => {
           // console.log('res is ',res.data.user)
           // console.log('state is ',state)

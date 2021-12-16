@@ -9,6 +9,7 @@ import AppHeader from "./components/Header"
 import AppFooter from "./components/Footer"
 import Login from "./components/Login"
 import store from "./store"
+import "./utils/http"
 
 const { Header, Footer, Content } = Layout
 
