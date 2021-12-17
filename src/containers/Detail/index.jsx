@@ -23,7 +23,6 @@ const Detail = function (props) {
         const { data } = res.data
         setPage(data)
       })
-
     return () => setPage({})
   }, [match.params, match.params.id])
 
