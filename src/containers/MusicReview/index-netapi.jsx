@@ -24,7 +24,48 @@ class MusicReview extends Component {
     this.state = { listData: [], isLoading: true }
   }
 
-  // eslint-disable-next-line react/sort-comp
+  componentDidMount() {
+    // console.log('前',this.state.listData)
+    this.getInfo()
+    // console.log('后',this.state.listData)
+  }
+
+  // 异步请求API获取数据
+  getInfo() {
+    const newData = []
+    for (let i = 0; i < 12; i += 1) {
+      axios
+        .get("https://api.muxiaoguo.cn/api/163reping?api_key=79087ba62bb72df2")
+        .then((res) => {
+          const {
+            songId,
+            songPic,
+            songName,
+            nickname,
+            content,
+            avatar,
+            likedCount,
+            time,
+          } = res.data.data
+          newData.push({
+            href: "#",
+            id: songId,
+            title: songName,
+            avatar,
+            description: nickname,
+            content,
+            pic: songPic,
+            liked: likedCount,
+            time,
+          })
+        })
+        .then(() => {
+          this.setState(() => ({ listData: newData, isLoading: false }))
+        })
+        .catch((error) => console.log(error))
+    }
+  }
+
   render() {
     return (
       <List
@@ -70,49 +111,6 @@ class MusicReview extends Component {
         )}
       />
     )
-  }
-
-  // 异步请求API获取数据
-  async getInfo() {
-    const newData = []
-    // eslint-disable-next-line no-plusplus
-    for (let i = 0; i < 12; i++) {
-      // eslint-disable-next-line no-await-in-loop
-      await axios
-        .get("https://api.muxiaoguo.cn/api/163reping?api_key=79087ba62bb72df2")
-        .then((res) => {
-          const {
-            songId,
-            songPic,
-            songName,
-            nickname,
-            content,
-            avatar,
-            likedCount,
-            time,
-          } = res.data.data
-          newData.push({
-            href: "#",
-            id: songId,
-            title: songName,
-            avatar,
-            description: nickname,
-            content,
-            pic: songPic,
-            liked: likedCount,
-            time,
-          })
-        })
-        // eslint-disable-next-line no-console
-        .catch((error) => console.log(error))
-    }
-    this.setState(() => ({ listData: newData, isLoading: false }))
-  }
-
-  componentDidMount() {
-    // console.log('前',this.state.listData)
-    this.getInfo()
-    // console.log('后',this.state.listData)
   }
 }
 

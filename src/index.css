@@ -18,10 +18,6 @@ code {
   background: #ffffff;
 }
 
-.content {
-  background: #e2e3df;
-  min-height: 520px;
-}
 .ant-list-item {
   justify-content: center;
 }

@@ -34,5 +34,6 @@ module.exports = {
     "import/no-named-as-default-member": 0,
     "arrow-body-style": "off",
     "prefer-arrow-callback": "off",
+    "react/react-in-jsx-scope": 0,
   },
 }

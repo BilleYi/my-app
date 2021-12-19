@@ -1,5 +1,3 @@
-import React from "react"
-
 const AppFooter = function () {
   return (
     <h2>
