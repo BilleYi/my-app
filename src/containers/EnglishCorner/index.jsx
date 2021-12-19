@@ -36,7 +36,7 @@ export default function EnglishCorner() {
         loading={isLoading}
         renderItem={(item) => (
           <List.Item>
-            <Link to={`/pages/detail/${item.id}`} className="link">
+            <Link to={`/pages/2/detail/${item.id}`} className="link">
               {item.title}
             </Link>
           </List.Item>
