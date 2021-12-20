@@ -1,3 +1,6 @@
+/**
+ * @description EnglishCorner详情页
+ */
 import React, { useState, useEffect } from "react"
 import { Result, Button, Card } from "antd"
 import { useSelector } from "react-redux"

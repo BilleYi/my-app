@@ -1,3 +1,6 @@
+/**
+ * @description 影视页组件详情页
+ */
 import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
 import { Result, Button, Card } from "antd"
@@ -20,6 +23,7 @@ function Info(props) {
     return () => null
   }, [id, list])
 
+  // TODO: 登录状态刷新数据获取异常bug
   if (isLogin) {
     if (isLoading) {
       return (

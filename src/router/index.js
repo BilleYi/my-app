@@ -5,6 +5,7 @@ import NewsInfo from "../containers/NewsInfo"
 import NewsDetail from "../containers/NewsInfo/Info"
 import Detail from "../containers/Detail"
 
+// TODO: 使用 V6 版本重构
 export default function Router() {
   return (
     <CacheSwitch>

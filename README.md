@@ -11,7 +11,7 @@ src
     --containers    页面组件
         |--MusicReview      乐评页面
         |--EnglishCorner    英语角页面
-        |--NewsInfo         资讯页面
+        |--NewsInfo         影视页面
         |--Detail           详情页面
     --router        路由封装
     --store         Redux

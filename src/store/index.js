@@ -1,3 +1,6 @@
+/**
+ * @description 使用redux-tookit重构redux
+ */
 import { configureStore } from "@reduxjs/toolkit"
 import loginSlice from "./features/loginSlice"
 import movieSlice from "./features/movieSlice"
