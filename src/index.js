@@ -12,7 +12,7 @@ import store from "./store"
 import "./utils/http"
 
 const { Header, Footer, Content } = Layout
-const intViewportHeight = document.documentElement.clientHeight - 64
+const intViewportHeight = window.innerHeight
 const App = function () {
   return (
     <BrowserRouter>
@@ -23,7 +23,10 @@ const App = function () {
             <Login />
           </Header>
           <Content
-            style={{ minHeight: intViewportHeight, background: "#e2e3df" }}
+            style={{
+              minHeight: `${intViewportHeight}px`,
+              background: "#e2e3df",
+            }}
           >
             <Router />
           </Content>

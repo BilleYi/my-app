@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
 import { Result, Button, Card } from "antd"
+import "./style.css"
 
 const { Meta } = Card
 
 function Info(props) {
-  const { list } = useSelector((state) => state.movie)
+  const { list, isLoading } = useSelector((state) => state.movie)
   const { id } = props.match.params
   const [data, setData] = useState([])
   const { isLogin } = useSelector((state) => state.loginInfo)
@@ -20,9 +21,23 @@ function Info(props) {
   }, [id, list])
 
   if (isLogin) {
+    if (isLoading) {
+      return (
+        <h1>
+          无法获取数据，请返回上一页
+          <Button
+            shape="round"
+            onClick={handleBackClick}
+            style={{ backgroundColor: "orange" }}
+          >
+            返回
+          </Button>
+        </h1>
+      )
+    }
     return (
       <Card
-        title={data.title}
+        title={data?.title}
         style={{ textAlign: "center", marginBottom: "10px" }}
         extra={
           <Button
@@ -34,14 +49,16 @@ function Info(props) {
           </Button>
         }
       >
-        <Meta description={data.focus} />
+        <Meta description={data?.focus} />
         <div>
           <img
             alt="电影海报"
-            src={data.imageUrl}
+            src={data?.imageUrl}
             style={{ float: "left", margin: "10px 50px" }}
           />
-          <p>{data.description}</p>
+          <p style={{ textAlign: "left", margin: "20px" }}>
+            {data?.description}
+          </p>
         </div>
       </Card>
     )

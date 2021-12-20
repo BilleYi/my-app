@@ -22,7 +22,7 @@ export const movieSlice = createSlice({
   // 可以额外的触发其他slice中的数据关联改变
   extraReducers: {
     [loadData.fulfilled](state, { payload }) {
-      console.log(payload)
+      // console.log(payload)
       state.list = payload.data.list
       state.isLoading = !state.isLoading
     },

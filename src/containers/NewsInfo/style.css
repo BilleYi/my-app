@@ -22,3 +22,7 @@ a:hover {
 a:active {
   color: #66cc66;
 }
+
+.ant-card-head-title {
+  margin-left: -72px;
+}
